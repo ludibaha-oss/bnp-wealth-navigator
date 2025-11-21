@@ -13,6 +13,10 @@ import {
   CheckCircle2
 } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
+import bnpLogo from "@/assets/bnp-paribas-logo.png";
+import testimonial1 from "@/assets/testimonial-1.jpg";
+import testimonial2 from "@/assets/testimonial-2.jpg";
+import testimonial3 from "@/assets/testimonial-3.jpg";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -131,9 +135,7 @@ const Landing = () => {
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-8">
-            <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-              BNP Paribas
-            </h1>
+            <img src={bnpLogo} alt="BNP Paribas" className="h-10" />
             <nav className="hidden md:flex gap-6">
               <a href="#diagnostic" className="text-sm hover:text-primary transition-colors">Diagnostic</a>
               <a href="#services" className="text-sm hover:text-primary transition-colors">Services</a>
@@ -183,12 +185,13 @@ const Landing = () => {
               <p className="text-xl text-muted-foreground">Real-time insights and control over your entire wealth portfolio</p>
             </div>
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border">
-              <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                <Button size="lg" className="gap-2">
-                  <Play className="h-5 w-5" />
-                  Watch Demo
-                </Button>
-              </div>
+              <iframe
+                className="w-full aspect-video"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                title="Dashboard Demo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
             </div>
           </div>
         </div>
@@ -305,20 +308,25 @@ const Landing = () => {
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl font-bold text-center mb-16">What Our Clients Say</h2>
             <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
-                <Card key={index} className="p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="h-12 w-12 rounded-full bg-gradient-primary flex items-center justify-center text-white font-bold">
-                      {testimonial.name.charAt(0)}
+              {testimonials.map((testimonial, index) => {
+                const images = [testimonial1, testimonial2, testimonial3];
+                return (
+                  <Card key={index} className="p-6">
+                    <div className="flex items-center gap-4 mb-4">
+                      <img 
+                        src={images[index]} 
+                        alt={testimonial.name}
+                        className="h-12 w-12 rounded-full object-cover"
+                      />
+                      <div>
+                        <p className="font-semibold">{testimonial.name}</p>
+                        <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-semibold">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                    </div>
-                  </div>
-                  <p className="text-muted-foreground italic">"{testimonial.text}"</p>
-                </Card>
-              ))}
+                    <p className="text-muted-foreground italic">"{testimonial.text}"</p>
+                  </Card>
+                );
+              })}
             </div>
           </div>
         </div>

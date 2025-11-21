@@ -1,56 +1,59 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, TrendingUp, Briefcase, Building2 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Calendar, Clock } from "lucide-react";
+import article1 from "@/assets/article-1.jpg";
+import article2 from "@/assets/article-2.jpg";
+import article3 from "@/assets/article-3.jpg";
 
 const articles = [
   {
-    title: "Tax Optimization for Entrepreneurs 2024",
-    excerpt: "Discover new tax optimization strategies for business owners and how to maximize your benefits.",
-    category: "Tax",
+    title: "Optimizing Your Tax Strategy for 2024",
+    excerpt: "Discover the latest tax optimization strategies for entrepreneurs and business leaders. Learn how to maximize deductions while staying compliant.",
+    category: "Tax Planning",
     date: "March 15, 2024",
-    readTime: "8 min",
-    icon: TrendingUp,
+    readTime: "8 min read",
+    image: article1
   },
   {
-    title: "Creating a Holding: Complete Guide",
-    excerpt: "Everything you need to know about setting up a holding company and managing your assets.",
-    category: "Legal Structure",
-    date: "March 12, 2024",
-    readTime: "12 min",
-    icon: Building2,
-  },
-  {
-    title: "Real Estate Investment in 2024",
-    excerpt: "Market trends and opportunities in commercial and residential real estate.",
-    category: "Investment",
+    title: "Building Generational Wealth: A Comprehensive Guide",
+    excerpt: "Explore proven strategies for creating and preserving wealth across generations. From estate planning to investment diversification.",
+    category: "Wealth Management",
     date: "March 10, 2024",
-    readTime: "10 min",
-    icon: Briefcase,
+    readTime: "12 min read",
+    image: article2
   },
   {
-    title: "Succession Planning: Best Practices",
-    excerpt: "How to prepare the transmission of your business while optimizing taxation.",
-    category: "Transmission",
-    date: "March 8, 2024",
-    readTime: "15 min",
-    icon: TrendingUp,
-  },
-  {
-    title: "Asset Diversification Strategies",
-    excerpt: "Reduce risk through intelligent asset allocation across different investment vehicles.",
-    category: "Investment",
+    title: "Exit Strategies: Maximizing Value in Business Sales",
+    excerpt: "Planning to sell your business? Learn how to structure the sale for optimal tax efficiency and maximum returns.",
+    category: "Exit Planning",
     date: "March 5, 2024",
-    readTime: "9 min",
-    icon: Briefcase,
+    readTime: "10 min read",
+    image: article3
   },
   {
-    title: "Executive Protection Solutions",
-    excerpt: "Comprehensive insurance and legal protection strategies for business leaders.",
-    category: "Protection",
-    date: "March 1, 2024",
-    readTime: "11 min",
-    icon: Building2,
+    title: "The Role of Holding Companies in Wealth Protection",
+    excerpt: "Understanding how holding company structures can provide asset protection and tax advantages for entrepreneurs.",
+    category: "Legal Structure",
+    date: "February 28, 2024",
+    readTime: "7 min read",
+    image: article1
   },
+  {
+    title: "Investment Diversification Beyond Your Business",
+    excerpt: "Why entrepreneurs should diversify their wealth and practical strategies for building a resilient investment portfolio.",
+    category: "Investment",
+    date: "February 20, 2024",
+    readTime: "9 min read",
+    image: article2
+  },
+  {
+    title: "Understanding Key Person Insurance for Startups",
+    excerpt: "Protect your business from unexpected loss with key person insurance. A guide for growing companies.",
+    category: "Protection",
+    date: "February 15, 2024",
+    readTime: "6 min read",
+    image: article3
+  }
 ];
 
 export default function Articles() {
@@ -64,34 +67,34 @@ export default function Articles() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {articles.map((article, index) => (
-            <Card key={index} className="hover:shadow-lg transition-all duration-300 group">
+            <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
+              <div className="h-48 overflow-hidden">
+                <img 
+                  src={article.image} 
+                  alt={article.title}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
               <CardHeader>
-                <div className="flex items-start justify-between mb-3">
-                  <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <article.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <span className="text-xs font-medium text-muted-foreground bg-muted px-3 py-1 rounded-full">
-                    {article.category}
-                  </span>
+                <div className="flex items-center gap-2 mb-2">
+                  <Badge variant="secondary">{article.category}</Badge>
                 </div>
-                <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                  {article.title}
-                </CardTitle>
+                <CardTitle className="text-xl">{article.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-4 line-clamp-3">
-                  {article.excerpt}
-                </p>
-                <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
-                  <span>{article.date}</span>
-                  <span>{article.readTime} read</span>
+                <p className="text-muted-foreground mb-4">{article.excerpt}</p>
+                <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="h-4 w-4" />
+                    <span>{article.date}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-4 w-4" />
+                    <span>{article.readTime}</span>
+                  </div>
                 </div>
-                <Button variant="ghost" className="w-full group-hover:bg-primary/10">
-                  Read more
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
               </CardContent>
             </Card>
           ))}
