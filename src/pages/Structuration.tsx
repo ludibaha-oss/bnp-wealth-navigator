@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { AIAssistant } from "@/components/AIAssistant";
 
 const structurationCards = [
   {
@@ -53,9 +54,12 @@ const structurationCards = [
 const Structuration = () => {
   return (
     <div className="p-6 space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-foreground mb-2">Structuration Juridique & Fiscale</h1>
-        <p className="text-muted-foreground">Optimisez votre architecture patrimoniale</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Structuration Juridique & Fiscale</h1>
+          <p className="text-muted-foreground">Optimisez votre architecture patrimoniale</p>
+        </div>
+        <AIAssistant mode="legal" />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

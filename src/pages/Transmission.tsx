@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Rocket, Building } from "lucide-react";
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip } from "recharts";
+import { AIAssistant } from "@/components/AIAssistant";
 
 const COLORS = ['hsl(158, 64%, 42%)', 'hsl(45, 80%, 65%)', 'hsl(220, 18%, 40%)', 'hsl(200, 70%, 50%)', 'hsl(280, 60%, 60%)'];
 
@@ -21,9 +22,12 @@ const Transmission = () => {
 
   return (
     <div className="p-6 space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-foreground mb-2">Transmission & Exit</h1>
-        <p className="text-muted-foreground">Préparez votre stratégie de sortie ou transmission</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Transmission & Exit</h1>
+          <p className="text-muted-foreground">Préparez votre stratégie de sortie ou transmission</p>
+        </div>
+        <AIAssistant mode="exit" />
       </div>
 
       <div className="flex gap-4 mb-6">

@@ -7,7 +7,8 @@ import {
   Shield, 
   ArrowLeftRight,
   Users,
-  FileText
+  FileText,
+  Landmark
 } from "lucide-react";
 import bnpLogo from "@/assets/bnp-logo.png";
 
@@ -16,6 +17,7 @@ const navigation = [
   { name: "Diagnostic Patrimonial", href: "/diagnostic", icon: ClipboardCheck },
   { name: "Structuration Juridique & Fiscale", href: "/structuration", icon: Building2 },
   { name: "Investissement & Diversification", href: "/investissement", icon: TrendingUp },
+  { name: "Agrégateur Bancaire", href: "/bank-aggregator", icon: Landmark },
   { name: "Protection du Dirigeant", href: "/protection", icon: Shield },
   { name: "Transmission & Exit", href: "/transmission", icon: ArrowLeftRight },
   { name: "Communauté Entrepreneurs", href: "/communaute", icon: Users },

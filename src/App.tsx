@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Diagnostic from "./pages/Diagnostic";
 import Structuration from "./pages/Structuration";
 import Investissement from "./pages/Investissement";
+import BankAggregator from "./pages/BankAggregator";
 import Protection from "./pages/Protection";
 import Transmission from "./pages/Transmission";
 import Communaute from "./pages/Communaute";
@@ -33,6 +34,7 @@ const App = () => (
                 <Route path="/diagnostic" element={<Diagnostic />} />
                 <Route path="/structuration" element={<Structuration />} />
                 <Route path="/investissement" element={<Investissement />} />
+                <Route path="/bank-aggregator" element={<BankAggregator />} />
                 <Route path="/protection" element={<Protection />} />
                 <Route path="/transmission" element={<Transmission />} />
                 <Route path="/communaute" element={<Communaute />} />

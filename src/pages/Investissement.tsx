@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { TrendingUp, Home, Briefcase, AlertTriangle } from "lucide-react";
 import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend } from "recharts";
+import { AIAssistant } from "@/components/AIAssistant";
 
 const dependencyData = [
   { category: 'Entreprise', value: 68 },
@@ -33,9 +34,12 @@ const privateMarkets = [
 const Investissement = () => {
   return (
     <div className="p-6 space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-foreground mb-2">Investissement & Diversification</h1>
-        <p className="text-muted-foreground">Réduisez votre dépendance et optimisez vos rendements</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Investissement & Diversification</h1>
+          <p className="text-muted-foreground">Réduisez votre dépendance et optimisez vos rendements</p>
+        </div>
+        <AIAssistant mode="patrimony" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
