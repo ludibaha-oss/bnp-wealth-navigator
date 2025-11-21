@@ -16,6 +16,9 @@ import Protection from "./pages/Protection";
 import Transmission from "./pages/Transmission";
 import Communaute from "./pages/Communaute";
 import Documents from "./pages/Documents";
+import Articles from "./pages/Articles";
+import Podcasts from "./pages/Podcasts";
+import Team from "./pages/Team";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +33,9 @@ const App = () => (
           {/* Public routes */}
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/articles" element={<Articles />} />
+          <Route path="/podcasts" element={<Podcasts />} />
+          <Route path="/team" element={<Team />} />
           
           {/* Protected routes with layout */}
           <Route path="/*" element={
