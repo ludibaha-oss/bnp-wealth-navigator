@@ -154,7 +154,7 @@ const Landing = () => {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-10"
+          className="absolute inset-0 bg-cover bg-center opacity-30"
           style={{ backgroundImage: `url(${heroBackground})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
