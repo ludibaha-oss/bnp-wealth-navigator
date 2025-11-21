@@ -17,6 +17,7 @@ import bnpLogo from "@/assets/bnp-paribas-logo.png";
 import testimonial1 from "@/assets/testimonial-1.jpg";
 import testimonial2 from "@/assets/testimonial-2.jpg";
 import testimonial3 from "@/assets/testimonial-3.jpg";
+import heroBackground from "@/assets/hero-background.png";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -152,6 +153,10 @@ const Landing = () => {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-10"
+          style={{ backgroundImage: `url(${heroBackground})` }}
+        />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
@@ -187,7 +192,7 @@ const Landing = () => {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border">
               <iframe
                 className="w-full aspect-video"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                src="https://www.youtube.com/embed/eh5_2K1-baE"
                 title="Dashboard Demo"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -200,55 +205,70 @@ const Landing = () => {
       {/* Diagnostic Section */}
       <section id="diagnostic" className="py-24">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold mb-4">Free Wealth Diagnostic</h2>
-              <p className="text-xl text-muted-foreground">Answer a few questions to get personalized insights</p>
+              <p className="text-xl text-muted-foreground">Discover your wealth optimization potential</p>
             </div>
 
-            <Card className="p-8">
-              <div className="mb-8">
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-sm font-medium">Progress</span>
-                  <span className="text-sm text-muted-foreground">{currentQuestion + 1}/{quizQuestions.length}</span>
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <Card className="p-8 text-center hover:shadow-xl transition-all duration-300">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
+                  <TrendingUp className="h-8 w-8 text-primary" />
                 </div>
-                <div className="h-2 bg-muted rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-gradient-primary transition-all duration-300"
-                    style={{ width: `${((currentQuestion + 1) / quizQuestions.length) * 100}%` }}
-                  />
-                </div>
-              </div>
+                <h3 className="text-3xl font-bold mb-2">35%</h3>
+                <p className="text-sm font-medium mb-2">Average Tax Savings</p>
+                <p className="text-xs text-muted-foreground">Optimized through strategic structuring</p>
+              </Card>
 
-              <div className="space-y-6">
-                <h3 className="text-2xl font-semibold">{quizQuestions[currentQuestion].question}</h3>
-                <div className="grid gap-3">
-                  {quizQuestions[currentQuestion].options.map((option, index) => (
-                    <Button
-                      key={index}
-                      variant={answers[currentQuestion] === option ? "default" : "outline"}
-                      className="justify-start text-left h-auto py-4 px-6"
-                      onClick={() => {
-                        setAnswers({ ...answers, [currentQuestion]: option });
-                        if (currentQuestion < quizQuestions.length - 1) {
-                          setTimeout(() => setCurrentQuestion(currentQuestion + 1), 300);
-                        }
-                      }}
-                    >
-                      {option}
-                    </Button>
-                  ))}
+              <Card className="p-8 text-center hover:shadow-xl transition-all duration-300">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
+                  <Shield className="h-8 w-8 text-primary" />
                 </div>
-                {currentQuestion === quizQuestions.length - 1 && answers[currentQuestion] && (
-                  <Button 
-                    className="w-full mt-4" 
-                    size="lg"
-                    onClick={() => navigate('/login')}
-                  >
-                    Get Your Personalized Diagnostic
-                    <ArrowRight className="ml-2" />
-                  </Button>
-                )}
+                <h3 className="text-3xl font-bold mb-2">€2.4M</h3>
+                <p className="text-sm font-medium mb-2">Average Assets Protected</p>
+                <p className="text-xs text-muted-foreground">Through legal structuring</p>
+              </Card>
+
+              <Card className="p-8 text-center hover:shadow-xl transition-all duration-300">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
+                  <Building2 className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-3xl font-bold mb-2">7.2%</h3>
+                <p className="text-sm font-medium mb-2">Average Annual Returns</p>
+                <p className="text-xs text-muted-foreground">On diversified portfolios</p>
+              </Card>
+            </div>
+
+            <Card className="p-8 shadow-xl">
+              <div className="text-center space-y-6">
+                <h3 className="text-2xl font-bold">Get Your Personalized Wealth Analysis</h3>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  Our diagnostic evaluates your current wealth structure across 7 key pillars and provides
+                  actionable recommendations to optimize your financial strategy.
+                </p>
+                <div className="flex flex-wrap justify-center gap-6 pt-4">
+                  <div className="flex items-center gap-2 text-sm">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    <span>Tax Efficiency Score</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    <span>Protection Assessment</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    <span>Growth Opportunities</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    <span>Succession Planning</span>
+                  </div>
+                </div>
+                <Button size="lg" onClick={() => navigate("/login")} className="mt-6">
+                  Start Free Diagnostic
+                  <ArrowRight className="ml-2" />
+                </Button>
               </div>
             </Card>
           </div>
