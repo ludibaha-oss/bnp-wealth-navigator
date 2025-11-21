@@ -6,30 +6,186 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import bnpLogo from "@/assets/bnp-logo.png";
 
+type Language = 'fr' | 'en';
+
 const Landing = () => {
   const navigate = useNavigate();
   const [showAIChat, setShowAIChat] = useState(false);
   const [quizStep, setQuizStep] = useState(0);
   const [quizAnswers, setQuizAnswers] = useState<Record<string, string>>({});
+  const [language, setLanguage] = useState<Language>('fr');
+
+  const t = {
+    fr: {
+      clientLogin: "Espace Client",
+      hero: {
+        badge: "Powered by BIVWAK+ AI",
+        title: "Optimisez, protégez et transmettez",
+        titleGradient: "votre patrimoine entrepreneurial",
+        subtitle: "Une approche 360°, sur-mesure et experte pour les entrepreneurs en Série A+ et dirigeants de PME en phase de transmission.",
+        cta: "Diagnostic 360° en 5 minutes",
+        ctaSecondary: "Prendre RDV avec un expert"
+      },
+      dashboard: {
+        title: "Tableau de bord BIVWAK+",
+        subtitle: "Pilotez votre patrimoine en temps réel"
+      },
+      diagnostic: {
+        title: "Diagnostic Patrimonial 360°",
+        subtitle: "10 questions pour une analyse personnalisée de votre situation",
+        question: "Question",
+        completed: "complété",
+        analyzing: "Analyse en cours...",
+        aiGenerating: "Notre IA BIVWAK+ génère votre rapport personnalisé",
+        analyzing1: "Analyse de votre profil patrimonial...",
+        analyzing2: "Calcul des optimisations possibles...",
+        analyzing3: "Génération de recommandations personnalisées...",
+        receivePdf: "Recevoir mon diagnostic PDF"
+      },
+      pillars: {
+        title: "7 Piliers pour Maîtriser votre Patrimoine",
+        subtitle: "Une approche globale et intégrée pour les entrepreneurs ambitieux",
+        simulator: "Simulateur Interactif",
+        launchSimulation: "Lancer la simulation"
+      },
+      testimonials: {
+        title: "Ils Ont Transformé leur Patrimoine",
+        subtitle: "Rejoignez des centaines d'entrepreneurs qui nous font confiance"
+      },
+      community: {
+        title: "Communauté BNP Entrepreneurs",
+        subtitle: "Un réseau exclusif pour accélérer ensemble",
+        events: "Événements Mensuels",
+        eventsDesc: "Pitch sessions, networking premium et masterclasses avec des entrepreneurs à succès",
+        mentoring: "Mentorat & Slack Privé",
+        mentoringDesc: "Échangez avec vos pairs, partagez vos deals et accédez à des opportunités early-stage",
+        join: "Rejoindre la Communauté"
+      },
+      news: {
+        title: "Actualités Financières",
+        subtitle: "Restez informé des dernières évolutions",
+        readArticle: "Lire l'article"
+      },
+      podcasts: {
+        title: "Podcasts Juridiques",
+        subtitle: "L'expertise juridique en format audio"
+      },
+      cta: {
+        title: "Prêt à Optimiser votre Patrimoine?",
+        subtitle: "Rejoignez la plateforme la plus avancée pour les entrepreneurs",
+        button: "Commencer Maintenant"
+      },
+      footer: {
+        tagline: "BNP Paribas Entrepreneurs - L'excellence patrimoniale pour dirigeants ambitieux",
+        services: "Services",
+        resources: "Ressources",
+        contact: "Contact",
+        copyright: "© 2025 BNP Paribas Entrepreneurs. Tous droits réservés."
+      },
+      ai: {
+        title: "BIVWAK+ Assistant",
+        greeting: "Bonjour! Je suis BIVWAK+, votre assistant IA. Comment puis-je vous aider aujourd'hui?",
+        placeholder: "Posez votre question..."
+      }
+    },
+    en: {
+      clientLogin: "Client Login",
+      hero: {
+        badge: "Powered by BIVWAK+ AI",
+        title: "Optimize, protect and transmit",
+        titleGradient: "your entrepreneurial wealth",
+        subtitle: "A 360°, tailor-made and expert approach for Series A+ entrepreneurs and SME leaders in transition phase.",
+        cta: "360° Diagnostic in 5 minutes",
+        ctaSecondary: "Book an appointment with an expert"
+      },
+      dashboard: {
+        title: "BIVWAK+ Dashboard",
+        subtitle: "Manage your wealth in real-time"
+      },
+      diagnostic: {
+        title: "360° Wealth Diagnostic",
+        subtitle: "10 questions for a personalized analysis of your situation",
+        question: "Question",
+        completed: "completed",
+        analyzing: "Analyzing...",
+        aiGenerating: "Our BIVWAK+ AI is generating your personalized report",
+        analyzing1: "Analyzing your wealth profile...",
+        analyzing2: "Calculating possible optimizations...",
+        analyzing3: "Generating personalized recommendations...",
+        receivePdf: "Receive my diagnostic PDF"
+      },
+      pillars: {
+        title: "7 Pillars to Master Your Wealth",
+        subtitle: "A comprehensive and integrated approach for ambitious entrepreneurs",
+        simulator: "Interactive Simulator",
+        launchSimulation: "Launch simulation"
+      },
+      testimonials: {
+        title: "They Transformed Their Wealth",
+        subtitle: "Join hundreds of entrepreneurs who trust us"
+      },
+      community: {
+        title: "BNP Entrepreneurs Community",
+        subtitle: "An exclusive network to accelerate together",
+        events: "Monthly Events",
+        eventsDesc: "Pitch sessions, premium networking and masterclasses with successful entrepreneurs",
+        mentoring: "Mentoring & Private Slack",
+        mentoringDesc: "Exchange with your peers, share your deals and access early-stage opportunities",
+        join: "Join the Community"
+      },
+      news: {
+        title: "Financial News",
+        subtitle: "Stay informed about the latest developments",
+        readArticle: "Read article"
+      },
+      podcasts: {
+        title: "Legal Podcasts",
+        subtitle: "Legal expertise in audio format"
+      },
+      cta: {
+        title: "Ready to Optimize Your Wealth?",
+        subtitle: "Join the most advanced platform for entrepreneurs",
+        button: "Start Now"
+      },
+      footer: {
+        tagline: "BNP Paribas Entrepreneurs - Wealth excellence for ambitious leaders",
+        services: "Services",
+        resources: "Resources",
+        contact: "Contact",
+        copyright: "© 2025 BNP Paribas Entrepreneurs. All rights reserved."
+      },
+      ai: {
+        title: "BIVWAK+ Assistant",
+        greeting: "Hello! I'm BIVWAK+, your AI assistant. How can I help you today?",
+        placeholder: "Ask your question..."
+      }
+    }
+  };
 
   const testimonials = [
     {
       name: "Sophie Durand",
-      role: "CEO, TechFlow (Série B)",
+      role: language === 'fr' ? "CEO, TechFlow (Série B)" : "CEO, TechFlow (Series B)",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop",
-      comment: "BIVWAK+ a transformé ma gestion patrimoniale. L'optimisation fiscale sur ma sortie m'a fait économiser 250K€. Une expertise rare."
+      comment: language === 'fr' 
+        ? "BIVWAK+ a transformé ma gestion patrimoniale. L'optimisation fiscale sur ma sortie m'a fait économiser 250K€. Une expertise rare."
+        : "BIVWAK+ transformed my wealth management. Tax optimization on my exit saved me 250K€. Rare expertise."
     },
     {
       name: "Marc Lefebvre",
-      role: "Fondateur, GreenTech Solutions",
+      role: language === 'fr' ? "Fondateur, GreenTech Solutions" : "Founder, GreenTech Solutions",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
-      comment: "La simulation d'exit et le pacte Dutreil ont sécurisé ma transmission. BNP Entrepreneurs comprend vraiment les enjeux des dirigeants."
+      comment: language === 'fr'
+        ? "La simulation d'exit et le pacte Dutreil ont sécurisé ma transmission. BNP Entrepreneurs comprend vraiment les enjeux des dirigeants."
+        : "Exit simulation and Dutreil pact secured my succession. BNP Entrepreneurs truly understands leadership challenges."
     },
     {
       name: "Amélie Chen",
-      role: "Co-fondatrice, DataSync AI",
+      role: language === 'fr' ? "Co-fondatrice, DataSync AI" : "Co-founder, DataSync AI",
       image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop",
-      comment: "Le diagnostic 360° a révélé une sur-exposition à mon entreprise. Aujourd'hui, mon patrimoine est diversifié et protégé."
+      comment: language === 'fr'
+        ? "Le diagnostic 360° a révélé une sur-exposition à mon entreprise. Aujourd'hui, mon patrimoine est diversifié et protégé."
+        : "The 360° diagnostic revealed over-exposure to my company. Today, my wealth is diversified and protected."
     }
   ];
 
@@ -167,13 +323,24 @@ const Landing = () => {
             <div className="h-8 w-px bg-border"></div>
             <span className="text-xl font-semibold text-foreground">Entrepreneurs</span>
           </div>
-          <Button 
-            variant="outline" 
-            onClick={() => navigate("/login")}
-            className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-          >
-            Espace Client
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
+              className="gap-2"
+            >
+              <Globe className="h-4 w-4" />
+              {language === 'fr' ? 'EN' : 'FR'}
+            </Button>
+            <Button 
+              variant="outline" 
+              onClick={() => navigate("/login")}
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              {t[language].clientLogin}
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -183,18 +350,18 @@ const Landing = () => {
           <div className="text-center space-y-8 animate-fade-in">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
               <Sparkles className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Powered by BIVWAK+ AI</span>
+              <span className="text-sm font-medium text-primary">{t[language].hero.badge}</span>
             </div>
             
             <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
-              Optimisez, protégez et transmettez<br/>
+              {t[language].hero.title}<br/>
               <span className="bg-gradient-primary bg-clip-text text-transparent">
-                votre patrimoine entrepreneurial
+                {t[language].hero.titleGradient}
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Une approche 360°, sur-mesure et experte pour les entrepreneurs en Série A+ et dirigeants de PME en phase de transmission.
+              {t[language].hero.subtitle}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
@@ -206,7 +373,7 @@ const Landing = () => {
                 }}
                 className="bg-gradient-primary shadow-premium text-lg px-8 py-6 hover:opacity-90 transition-all hover:scale-105"
               >
-                Diagnostic 360° en 5 minutes
+                {t[language].hero.cta}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
@@ -215,7 +382,7 @@ const Landing = () => {
                 className="text-lg px-8 py-6 border-gold text-gold hover:bg-gold hover:text-gold-foreground"
                 onClick={() => window.open('https://calendly.com', '_blank')}
               >
-                Prendre RDV avec un expert
+                {t[language].hero.ctaSecondary}
               </Button>
             </div>
           </div>
@@ -239,8 +406,8 @@ const Landing = () => {
               </video>
               <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent pointer-events-none"></div>
               <div className="absolute bottom-8 left-8 text-left">
-                <h3 className="text-2xl font-bold text-white mb-2">Tableau de bord BIVWAK+</h3>
-                <p className="text-white/90">Pilotez votre patrimoine en temps réel</p>
+                <h3 className="text-2xl font-bold text-white mb-2">{t[language].dashboard.title}</h3>
+                <p className="text-white/90">{t[language].dashboard.subtitle}</p>
               </div>
             </div>
           </div>
@@ -252,10 +419,10 @@ const Landing = () => {
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Diagnostic Patrimonial 360°
+              {t[language].diagnostic.title}
             </h2>
             <p className="text-xl text-muted-foreground">
-              10 questions pour une analyse personnalisée de votre situation
+              {t[language].diagnostic.subtitle}
             </p>
           </div>
 
@@ -263,8 +430,8 @@ const Landing = () => {
             {quizStep < quizQuestions.length ? (
               <div className="space-y-6">
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-sm text-muted-foreground">Question {quizStep + 1}/{quizQuestions.length}</span>
-                  <span className="text-sm font-medium text-primary">{Math.round((quizStep / quizQuestions.length) * 100)}% complété</span>
+                  <span className="text-sm text-muted-foreground">{t[language].diagnostic.question} {quizStep + 1}/{quizQuestions.length}</span>
+                  <span className="text-sm font-medium text-primary">{Math.round((quizStep / quizQuestions.length) * 100)}% {t[language].diagnostic.completed}</span>
                 </div>
                 <div className="h-2 bg-secondary rounded-full overflow-hidden">
                   <div 
@@ -292,20 +459,20 @@ const Landing = () => {
             ) : (
               <div className="text-center space-y-6">
                 <CheckCircle2 className="h-16 w-16 text-primary mx-auto" />
-                <h3 className="text-2xl font-bold text-foreground">Analyse en cours...</h3>
-                <p className="text-muted-foreground">Notre IA BIVWAK+ génère votre rapport personnalisé</p>
+                <h3 className="text-2xl font-bold text-foreground">{t[language].diagnostic.analyzing}</h3>
+                <p className="text-muted-foreground">{t[language].diagnostic.aiGenerating}</p>
                 <div className="bg-secondary/50 p-6 rounded-lg text-left space-y-3">
                   <div className="flex items-center gap-3">
                     <div className="h-2 w-2 rounded-full bg-primary animate-pulse"></div>
-                    <span className="text-sm">Analyse de votre profil patrimonial...</span>
+                    <span className="text-sm">{t[language].diagnostic.analyzing1}</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="h-2 w-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: "0.3s" }}></div>
-                    <span className="text-sm">Calcul des optimisations possibles...</span>
+                    <span className="text-sm">{t[language].diagnostic.analyzing2}</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="h-2 w-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: "0.6s" }}></div>
-                    <span className="text-sm">Génération de recommandations personnalisées...</span>
+                    <span className="text-sm">{t[language].diagnostic.analyzing3}</span>
                   </div>
                 </div>
                 <Button 
@@ -313,7 +480,7 @@ const Landing = () => {
                   className="bg-gradient-primary shadow-premium"
                   onClick={() => navigate("/login")}
                 >
-                  Recevoir mon diagnostic PDF
+                  {t[language].diagnostic.receivePdf}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </div>
@@ -327,10 +494,10 @@ const Landing = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              7 Piliers pour Maîtriser votre Patrimoine
+              {t[language].pillars.title}
             </h2>
             <p className="text-xl text-muted-foreground">
-              Une approche globale et intégrée pour les entrepreneurs ambitieux
+              {t[language].pillars.subtitle}
             </p>
           </div>
 
@@ -374,7 +541,7 @@ const Landing = () => {
                 <Card className="p-8 bg-card border-gold shadow-gold">
                   <div className="flex items-center gap-3 mb-6">
                     <BarChart3 className="h-6 w-6 text-gold" />
-                    <h4 className="text-xl font-semibold text-foreground">Simulateur Interactif</h4>
+                    <h4 className="text-xl font-semibold text-foreground">{t[language].pillars.simulator}</h4>
                   </div>
                   <p className="text-muted-foreground mb-6">
                     {idx === 0 && "Estimez votre potentiel d'optimisation patrimoniale"}
@@ -388,7 +555,7 @@ const Landing = () => {
                     className="bg-gradient-accent text-accent-foreground hover:opacity-90"
                     onClick={() => navigate("/login")}
                   >
-                    Lancer la simulation
+                    {t[language].pillars.launchSimulation}
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Card>
@@ -403,10 +570,10 @@ const Landing = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Ils Ont Transformé leur Patrimoine
+              {t[language].testimonials.title}
             </h2>
             <p className="text-xl text-muted-foreground">
-              Rejoignez des centaines d'entrepreneurs qui nous font confiance
+              {t[language].testimonials.subtitle}
             </p>
           </div>
 
@@ -445,18 +612,18 @@ const Landing = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Communauté BNP Entrepreneurs
+              {t[language].community.title}
             </h2>
             <p className="text-xl text-muted-foreground">
-              Un réseau exclusif pour accélérer ensemble
+              {t[language].community.subtitle}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <Card className="p-8 bg-gradient-card border-border shadow-card">
               <Award className="h-12 w-12 text-primary mb-4" />
-              <h3 className="text-2xl font-semibold text-foreground mb-3">Événements Mensuels</h3>
-              <p className="text-muted-foreground mb-4">Pitch sessions, networking premium et masterclasses avec des entrepreneurs à succès</p>
+              <h3 className="text-2xl font-semibold text-foreground mb-3">{t[language].community.events}</h3>
+              <p className="text-muted-foreground mb-4">{t[language].community.eventsDesc}</p>
               <img 
                 src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=400&fit=crop" 
                 alt="Events" 
@@ -466,8 +633,8 @@ const Landing = () => {
 
             <Card className="p-8 bg-gradient-card border-border shadow-card">
               <Users className="h-12 w-12 text-primary mb-4" />
-              <h3 className="text-2xl font-semibold text-foreground mb-3">Mentorat & Slack Privé</h3>
-              <p className="text-muted-foreground mb-4">Échangez avec vos pairs, partagez vos deals et accédez à des opportunités early-stage</p>
+              <h3 className="text-2xl font-semibold text-foreground mb-3">{t[language].community.mentoring}</h3>
+              <p className="text-muted-foreground mb-4">{t[language].community.mentoringDesc}</p>
               <img 
                 src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop" 
                 alt="Mentoring" 
@@ -482,7 +649,7 @@ const Landing = () => {
               className="bg-gradient-primary shadow-premium text-lg px-8 py-6"
               onClick={() => navigate("/login")}
             >
-              Rejoindre la Communauté
+              {t[language].community.join}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
@@ -494,10 +661,10 @@ const Landing = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Actualités Financières
+              {t[language].news.title}
             </h2>
             <p className="text-xl text-muted-foreground">
-              Restez informé des dernières évolutions
+              {t[language].news.subtitle}
             </p>
           </div>
 
@@ -525,7 +692,7 @@ const Landing = () => {
                     {news.title}
                   </h3>
                   <Button variant="link" className="px-0 mt-4 text-primary">
-                    Lire l'article <ArrowRight className="ml-2 h-4 w-4" />
+                    {t[language].news.readArticle} <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
               </Card>
@@ -539,10 +706,10 @@ const Landing = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Podcasts Juridiques
+              {t[language].podcasts.title}
             </h2>
             <p className="text-xl text-muted-foreground">
-              L'expertise juridique en format audio
+              {t[language].podcasts.subtitle}
             </p>
           </div>
 
@@ -588,17 +755,17 @@ const Landing = () => {
         <div className="container mx-auto max-w-4xl">
           <Card className="p-12 bg-gradient-primary border-0 text-center animate-fade-in shadow-premium">
             <h2 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
-              Prêt à Optimiser votre Patrimoine?
+              {t[language].cta.title}
             </h2>
             <p className="text-xl text-primary-foreground/90 mb-8">
-              Rejoignez la plateforme la plus avancée pour les entrepreneurs
+              {t[language].cta.subtitle}
             </p>
             <Button 
               size="lg"
               onClick={() => navigate("/login")}
               className="bg-background text-foreground hover:bg-background/90 text-lg px-8 py-6 shadow-gold hover:scale-105 transition-all"
             >
-              Commencer Maintenant
+              {t[language].cta.button}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Card>
@@ -614,11 +781,11 @@ const Landing = () => {
                 <img src={bnpLogo} alt="BNP Paribas" className="h-8" />
               </div>
               <p className="text-sm text-muted-foreground">
-                BNP Paribas Entrepreneurs - L'excellence patrimoniale pour dirigeants ambitieux
+                {t[language].footer.tagline}
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-foreground mb-4">Services</h4>
+              <h4 className="font-semibold text-foreground mb-4">{t[language].footer.services}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><a href="#" className="hover:text-primary transition-colors">Diagnostic 360°</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Structuration</a></li>
@@ -627,7 +794,7 @@ const Landing = () => {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-foreground mb-4">Ressources</h4>
+              <h4 className="font-semibold text-foreground mb-4">{t[language].footer.resources}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><a href="#" className="hover:text-primary transition-colors">Actualités</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Podcasts</a></li>
@@ -636,7 +803,7 @@ const Landing = () => {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-foreground mb-4">Contact</h4>
+              <h4 className="font-semibold text-foreground mb-4">{t[language].footer.contact}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><a href="#" className="hover:text-primary transition-colors">Prendre RDV</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Mentions légales</a></li>
@@ -646,7 +813,7 @@ const Landing = () => {
             </div>
           </div>
           <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            <p>© 2025 BNP Paribas Entrepreneurs. Tous droits réservés.</p>
+            <p>{t[language].footer.copyright}</p>
           </div>
         </div>
       </footer>
@@ -658,7 +825,7 @@ const Landing = () => {
             <div className="p-4 border-b border-border flex items-center justify-between bg-gradient-primary">
               <div className="flex items-center gap-2">
                 <Sparkles className="h-5 w-5 text-primary-foreground" />
-                <span className="font-semibold text-primary-foreground">BIVWAK+ Assistant</span>
+                <span className="font-semibold text-primary-foreground">{t[language].ai.title}</span>
               </div>
               <Button 
                 size="icon" 
@@ -672,7 +839,7 @@ const Landing = () => {
             <div className="p-4 space-y-4 h-80 overflow-y-auto bg-secondary/10">
               <div className="bg-card rounded-lg p-3 shadow-sm">
                 <p className="text-sm text-foreground">
-                  Bonjour! Je suis BIVWAK+, votre assistant IA. Comment puis-je vous aider aujourd'hui?
+                  {t[language].ai.greeting}
                 </p>
               </div>
               <div className="flex gap-2 flex-wrap">
@@ -694,7 +861,7 @@ const Landing = () => {
               <div className="flex gap-2">
                 <input 
                   type="text"
-                  placeholder="Posez votre question..."
+                  placeholder={t[language].ai.placeholder}
                   className="flex-1 px-3 py-2 rounded-lg bg-secondary border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                 />
                 <Button size="icon" className="bg-gradient-primary shadow-premium">
