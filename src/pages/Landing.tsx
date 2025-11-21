@@ -13,7 +13,7 @@ const Landing = () => {
   const [showAIChat, setShowAIChat] = useState(false);
   const [quizStep, setQuizStep] = useState(0);
   const [quizAnswers, setQuizAnswers] = useState<Record<string, string>>({});
-  const [language, setLanguage] = useState<Language>('fr');
+  const [language, setLanguage] = useState<Language>('en');
 
   const t = {
     fr: {
