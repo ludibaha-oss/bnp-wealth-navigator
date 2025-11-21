@@ -13,15 +13,15 @@ import {
 import bnpLogo from "@/assets/bnp-logo.png";
 
 const navigation = [
-  { name: "Dashboard 360°", href: "/", icon: LayoutDashboard },
-  { name: "Diagnostic Patrimonial", href: "/diagnostic", icon: ClipboardCheck },
-  { name: "Structuration Juridique & Fiscale", href: "/structuration", icon: Building2 },
-  { name: "Investissement & Diversification", href: "/investissement", icon: TrendingUp },
-  { name: "Agrégateur Bancaire", href: "/bank-aggregator", icon: Landmark },
-  { name: "Protection du Dirigeant", href: "/protection", icon: Shield },
-  { name: "Transmission & Exit", href: "/transmission", icon: ArrowLeftRight },
-  { name: "Communauté Entrepreneurs", href: "/communaute", icon: Users },
-  { name: "Documents & Rapports", href: "/documents", icon: FileText },
+  { name: "Dashboard 360°", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Wealth Diagnostic", href: "/diagnostic", icon: ClipboardCheck },
+  { name: "Legal & Tax Structure", href: "/structuration", icon: Building2 },
+  { name: "Investment & Diversification", href: "/investissement", icon: TrendingUp },
+  { name: "Bank Aggregator", href: "/bank-aggregator", icon: Landmark },
+  { name: "Executive Protection", href: "/protection", icon: Shield },
+  { name: "Succession & Exit", href: "/transmission", icon: ArrowLeftRight },
+  { name: "Entrepreneur Community", href: "/communaute", icon: Users },
+  { name: "Documents & Reports", href: "/documents", icon: FileText },
 ];
 
 export const Sidebar = () => {
